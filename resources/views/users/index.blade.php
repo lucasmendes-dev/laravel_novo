@@ -13,8 +13,8 @@
   <ul>
     @foreach ($users as $user)
       <li>
-        {{ $user->name }} -
-        {{ $user->email }}
+        {{ $user->name }} - 
+        {{ $user->email }} - 
         {{ $user->id }}
         | <a href="{{ route('users.edit', $user->id)}}">Editar</a>
         | <a href="{{ route('users.show', $user->id)}}">Detalhes</a>

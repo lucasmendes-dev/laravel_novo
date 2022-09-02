@@ -9,7 +9,13 @@
 <ul>
   <li>{{ $user->name }}</li>
   <li>{{ $user->email }}</li>
-
+  <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+    @method('DELETE')
+    @csrf
+    <button type="submit">Excluir Usuário</button>
+  </form>
 </ul>
+
+
 
 @endsection

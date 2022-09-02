@@ -60,20 +60,29 @@ class UserController extends Controller
         return view('users.edit', compact('user'));
     }
 
-    public function update(Request $request, $id) {
+    public function update(StoreUpdateUserFormRequest $request, $id) {
         
         if(!$user = User::find($id)) 
             return redirect()->route('users.index');
  
+        $data = $request->only('name', 'email');
+        if($request->password)
+            $data['password'] = bcrypt($request->password);
 
-        $user = $request->all();
-        $user['password'] = bcrypt($request->passord);
-
-        User::update($user);
+        $user->update($data);
 
         return redirect(route('users.index'))->with('msg', 'Usuário atualizado com sucesso!');
 
+    }
+
+    public function destroy($id) {
+
+        if(!$user = User::find($id)) 
+            return redirect()->route('users.index');
         
-        
+        $user->delete();
+
+        return redirect(route('users.index'))->with('msg', 'Usuário deletado com sucesso!');
+
     }
 }
