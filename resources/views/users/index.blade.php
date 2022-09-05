@@ -10,6 +10,12 @@
     ( <a href={{ route("users.create") }}>+</a> )
   </h1>
 
+  <form action="{{ route('users.index') }}" method="GET">
+    @csrf
+    <input type="text" name="search" placeholder="Pesquisar">
+    <button type="submit">Pesquisar</button>
+  </form>
+
   <ul>
     @foreach ($users as $user)
       <li>
