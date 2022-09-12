@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index(Request $request) {
-        
+
         //$users = User::where('name', 'LIKE', "%{$request->search}%")->get();
 
         $search = $request->search;
@@ -31,7 +31,7 @@ class UserController extends Controller
         //$user = User::where('id', $id)->first();
         if(!$user = User::find($id))
             return redirect()->route('users.index');
-        
+
         return view('users.show', compact('user'));
 
     }
@@ -41,7 +41,7 @@ class UserController extends Controller
         return view('users.create');
 
     }
-    
+
     public function store(StoreUpdateUserFormRequest $request) {
 
         // $user = new User;
@@ -65,15 +65,15 @@ class UserController extends Controller
 
         if(!$user = User::find($id))
             return redirect()->route('users.index');
-        
+
         return view('users.edit', compact('user'));
     }
 
     public function update(StoreUpdateUserFormRequest $request, $id) {
-        
-        if(!$user = User::find($id)) 
+
+        if(!$user = User::find($id))
             return redirect()->route('users.index');
- 
+
         $data = $request->only('name', 'email');
         if($request->password)
             $data['password'] = bcrypt($request->password);
@@ -86,9 +86,9 @@ class UserController extends Controller
 
     public function destroy($id) {
 
-        if(!$user = User::find($id)) 
+        if(!$user = User::find($id))
             return redirect()->route('users.index');
-        
+
         $user->delete();
 
         return redirect(route('users.index'))->with('msg', 'Usuário deletado com sucesso!');
