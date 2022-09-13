@@ -24,9 +24,14 @@
         {{ $user->id }}
         | <a href="{{ route('users.edit', $user->id) }}">Editar</a>
         | <a href="{{ route('users.show', $user->id) }}">Detalhes</a>
-        | <a href="{{ route('comments.index', $user->id) }}">Anotações (0)</a>
+        | <a href="{{ route('comments.index', $user->id) }}">Anotações ({{ count($user->comments) }})</a>
       </li>
     @endforeach
   </ul>
 
+  <div class="py-4">
+    {{ $users->appends([
+        'search' => request()->get('search', '')
+    ])->links() }}
+  </div>
 @endsection
